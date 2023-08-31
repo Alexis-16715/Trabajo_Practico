@@ -1,12 +1,9 @@
 package tp.model;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class Pattern {
 	private Light_Bulb[][] pattern;
-	private Map<Integer, Light_Bulb> allTheLightsHere = new HashMap <Integer, Light_Bulb>();
     private int numberAttempts;
 	public Pattern() {
 		pattern = new Light_Bulb[4][4];
@@ -34,12 +31,24 @@ public class Pattern {
     	for(int j = 0; j < pattern.length; j++) {
     		pattern[row][j].toggleState();
     	}
-    	
     	pattern[row][col].toggleState();
-        // Update neighboring states here
+    }
+    
+    
+    
+    //esta parte se nesesita testear
+    
+    public boolean wonAllLihhtOut(){
+    	boolean ret = true;
+    	for(int col = 0; col < pattern.length; col++) {
+    		for(int row = 0; row < pattern[0].length; row++) {
+    			ret = ret && pattern[col][row].getSwich_On_Or_Off();
+    		}
+    	}
+    	return ret;
     }
 
-    public int getContIntentos() {
+    public int getNumberAttemps() {
         return numberAttempts;
     }
 

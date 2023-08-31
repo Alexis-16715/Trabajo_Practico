@@ -7,6 +7,7 @@ public class View {
     private JFrame frame;
     private JButton[][] buttons;
     private JLabel lblIntentos;
+    private JLabel lblNewLabel;
 
     public View() {
         frame = new JFrame();
@@ -15,7 +16,6 @@ public class View {
         frame.setBounds(100, 100, 645, 440);
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        String luzAmarilla = "C:\\Users\\alexi\\Desktop\\Proyecto\\Luz_amarilla38px.png";
         
 
         buttons = new JButton[4][4];
@@ -23,7 +23,7 @@ public class View {
             for (int j = 0; j < 4; j++) {
                 JButton button = new JButton("");
                 // Set button properties here
-                button.setIcon(new ImageIcon(luzAmarilla));
+                button.setIcon(new ImageIcon(""));
                 button.setBounds(140+j*100, 30+i*90, 38, 41);
                 frame.getContentPane().add(button);
                 buttons[j][i] = button;
@@ -36,13 +36,24 @@ public class View {
         lblIntentos.setLocation(513, 361);
         // Set label properties here
         frame.getContentPane().add(lblIntentos);
+        
+        lblNewLabel = new JLabel("");
+        lblNewLabel.setBounds(519, 276, 84, 14);
+        frame.getContentPane().add(lblNewLabel);
+        
+        
+        
     }
 
     public JButton[][] getButtons() {
         return buttons;
     }
+    
+    public JLabel getlabel() {
+        return lblNewLabel;
+    }
 
-    public JLabel getLblIntentos() {
+    public JLabel getNumberAttemps() {
         return lblIntentos;
     }
 

@@ -16,6 +16,8 @@ import tp.view.View;
 public class Controller {
     private Pattern pattern;
     private View view;
+    private String luzRoja = "C:/Users/usuario/git/Trabajo_Practio/Trabajo_Practico/src/Luzroja38px.png";
+	private String luzAmarilla = "C:/Users/usuario/git/Trabajo_Practio/Trabajo_Practico/src/Luz_amarilla38px.png";
 
     public Controller(Pattern pattern, View view) {
         this.pattern = pattern;
@@ -28,12 +30,10 @@ public class Controller {
     private void initializeView() {
     	Light_Bulb[][] stateLightBulb = pattern.getStateGame();
         JButton[][] buttons = view.getButtons();
-        
-        System.out.print(stateLightBulb[0][0].getLuzAmarilla());
 
         for (int i = 0; i < stateLightBulb.length; i++) {
             for (int j = 0; j < stateLightBulb[0].length; j++) {
-            	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].lightOnOff()         )      );
+            	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].getSwich_On_Or_Off() ? luzRoja : luzAmarilla         )      );
             }
         }
         
@@ -46,7 +46,7 @@ public class Controller {
             for (int j = 0; j < buttons[i].length; j++) {
                 final int row = i;
                 final int col = j;
-                buttons[i][j].addActionListener(new ActionListener() {
+                buttons[row][col].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         pattern.toggleState(row, col);
                         updateView();
@@ -59,15 +59,20 @@ public class Controller {
     private void updateView() {
     	Light_Bulb[][] stateLightBulb = pattern.getStateGame();
         JButton[][] buttons = view.getButtons();
-        JLabel lblIntentos = view.getLblIntentos();
+        JLabel lblIntentos = view.getNumberAttemps();
+        JLabel label = view.getlabel();
 
-        for (int i = 0; i < stateLightBulb.length; i++) {
-            for (int j = 0; j < stateLightBulb[i].length; j++) {
-                buttons[i][j].setIcon(new ImageIcon( stateLightBulb[i][j].lightOnOff() ));
+        for (int column = 0; column < stateLightBulb.length; column++) {
+            for (int row = 0; row < stateLightBulb[column].length; row++) {
+                buttons[column][row].setIcon(new ImageIcon( stateLightBulb[column][row].getSwich_On_Or_Off() ? luzRoja : luzAmarilla  ));
             }
         }
+        if(pattern.wonAllLihhtOut()) {
+        	label.setText("Ganaste");
+        }
 
-        lblIntentos.setText("Intentos : " + pattern.getContIntentos());
+
+        lblIntentos.setText("Intentos : " + pattern.getNumberAttemps());
     }
 
     public static void main(String[] args) {
