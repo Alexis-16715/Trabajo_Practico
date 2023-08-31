@@ -2,20 +2,23 @@ package tp.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import tp.model.Model;
+import tp.model.Pattern;
+import tp.model.Light_Bulb;
 import tp.view.View;
 
+
 public class Controller {
-    private Model model;
+    private Pattern pattern;
     private View view;
 
-    public Controller(Model model, View view) {
-        this.model = model;
+    public Controller(Pattern pattern, View view) {
+        this.pattern = pattern;
         this.view = view;
 
         initializeView();
@@ -23,17 +26,19 @@ public class Controller {
     }
 
     private void initializeView() {
-        boolean[][] estados = model.getEstados();
+    	Light_Bulb[][] stateLightBulb = pattern.getStateGame();
         JButton[][] buttons = view.getButtons();
+        
+        System.out.print(stateLightBulb[0][0].getLuzAmarilla());
 
-        for (int i = 0; i < estados.length; i++) {
-            for (int j = 0; j < estados[i].length; j++) {
-                buttons[i][j].setIcon(new ImageIcon(estados[i][j] ? "C:\\\\Users\\\\alexi\\\\Desktop\\\\Proyecto\\\\Luz_amarilla38px.png" : "C:\\\\Users\\\\alexi\\\\Desktop\\\\Proyecto\\\\Luzroja38px.png"));
+        for (int i = 0; i < stateLightBulb.length; i++) {
+            for (int j = 0; j < stateLightBulb[0].length; j++) {
+            	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].lightOnOff()         )      );
             }
         }
         
     }
-
+    
     private void attachListeners() {
         JButton[][] buttons = view.getButtons();
 
@@ -43,7 +48,7 @@ public class Controller {
                 final int col = j;
                 buttons[i][j].addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        model.toggleState(row, col);
+                        pattern.toggleState(row, col);
                         updateView();
                     }
                 });
@@ -52,25 +57,25 @@ public class Controller {
     }
 
     private void updateView() {
-        boolean[][] estados = model.getEstados();
+    	Light_Bulb[][] stateLightBulb = pattern.getStateGame();
         JButton[][] buttons = view.getButtons();
         JLabel lblIntentos = view.getLblIntentos();
 
-        for (int i = 0; i < estados.length; i++) {
-            for (int j = 0; j < estados[i].length; j++) {
-                buttons[i][j].setIcon(new ImageIcon(estados[i][j] ? "C:\\\\Users\\\\alexi\\\\Desktop\\\\Proyecto\\\\Luz_amarilla38px.png" : "C:\\\\Users\\\\alexi\\\\Desktop\\\\Proyecto\\\\Luzroja38px.png"));
+        for (int i = 0; i < stateLightBulb.length; i++) {
+            for (int j = 0; j < stateLightBulb[i].length; j++) {
+                buttons[i][j].setIcon(new ImageIcon( stateLightBulb[i][j].lightOnOff() ));
             }
         }
 
-        lblIntentos.setText("Intentos : " + model.getContIntentos());
+        lblIntentos.setText("Intentos : " + pattern.getContIntentos());
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Model model = new Model();
+            	Pattern pattern = new Pattern();
                 View view = new View();
-                new Controller(model, view);
+                new Controller(pattern, view);
                 view.getFrame().setVisible(true);
             }
         });

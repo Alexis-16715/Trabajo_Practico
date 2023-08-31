@@ -16,7 +16,7 @@ public class View {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         String luzAmarilla = "C:\\Users\\alexi\\Desktop\\Proyecto\\Luz_amarilla38px.png";
-        String luzRoja = "C:\\Users\\alexi\\Desktop\\Proyecto\\Luzroja38px.png";
+        
 
         buttons = new JButton[4][4];
         for (int i = 0; i < 4; i++) {
