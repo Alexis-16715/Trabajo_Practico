@@ -2,6 +2,7 @@ package tp.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,8 +17,8 @@ import tp.view.View;
 public class Controller {
     private Pattern pattern;
     private View view;
-    private String luzRoja = "C:/Users/usuario/git/Trabajo_Practio/Trabajo_Practico/src/Luzroja38px.png";
-	private String luzAmarilla = "C:/Users/usuario/git/Trabajo_Practio/Trabajo_Practico/src/Luz_amarilla38px.png";
+	private URL luzAmarilla = getClass().getResource("/images/Luz_amarilla38px.png");
+	private URL luzRoja = getClass().getResource("/images/Luzroja38px.png");
 
     public Controller(Pattern pattern, View view) {
         this.pattern = pattern;
@@ -30,9 +31,14 @@ public class Controller {
     private void initializeView() {
     	Light_Bulb[][] stateLightBulb = pattern.getStateGame();
         JButton[][] buttons = view.getButtons();
+        
 
         for (int i = 0; i < stateLightBulb.length; i++) {
             for (int j = 0; j < stateLightBulb[0].length; j++) {
+            	
+                
+                
+                
             	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].getSwich_On_Or_Off() ? luzRoja : luzAmarilla         )      );
             }
         }
