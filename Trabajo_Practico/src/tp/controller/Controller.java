@@ -35,10 +35,6 @@ public class Controller {
 
         for (int i = 0; i < stateLightBulb.length; i++) {
             for (int j = 0; j < stateLightBulb[0].length; j++) {
-            	
-                
-                
-                
             	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].getSwich_On_Or_Off() ? luzRoja : luzAmarilla         )      );
             }
         }
