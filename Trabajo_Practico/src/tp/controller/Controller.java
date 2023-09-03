@@ -17,8 +17,8 @@ import tp.view.View;
 public class Controller {
     private Pattern pattern;
     private View view;
-	private URL luzAmarilla = getClass().getResource("/images/Luz_amarilla38px.png");
-	private URL luzRoja = getClass().getResource("/images/Luzroja38px.png");
+	private URL lightOn = getClass().getResource("/images/Light On.png");
+	private URL lighOff = getClass().getResource("/images/Light Off.png");
 
     public Controller(Pattern pattern, View view) {
         this.pattern = pattern;
@@ -35,7 +35,7 @@ public class Controller {
 
         for (int i = 0; i < stateLightBulb.length; i++) {
             for (int j = 0; j < stateLightBulb[0].length; j++) {
-            	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].getSwich_On_Or_Off() ? luzRoja : luzAmarilla         )      );
+            	buttons[i][j].setIcon(new ImageIcon(   stateLightBulb[i][j].getSwich_On_Or_Off() ? lighOff : lightOn         )      );
             }
         }
         
@@ -66,7 +66,7 @@ public class Controller {
 
         for (int column = 0; column < stateLightBulb.length; column++) {
             for (int row = 0; row < stateLightBulb[column].length; row++) {
-                buttons[column][row].setIcon(new ImageIcon( stateLightBulb[column][row].getSwich_On_Or_Off() ? luzRoja : luzAmarilla  ));
+                buttons[column][row].setIcon(new ImageIcon( stateLightBulb[column][row].getSwich_On_Or_Off() ? lighOff : lightOn  ));
             }
         }
         if(pattern.wonAllLihhtOut()) {

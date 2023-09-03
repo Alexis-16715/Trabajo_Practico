@@ -24,7 +24,7 @@ public class View {
                 JButton button = new JButton("");
                 // Set button properties here
                 button.setIcon(new ImageIcon(""));
-                button.setBounds(140+j*100, 30+i*90, 38, 41);
+                button.setBounds(140+j*100, 30+i*90, 50, 50);
                 frame.getContentPane().add(button);
                 buttons[j][i] = button;
             }
